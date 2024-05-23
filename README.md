@@ -1,12 +1,26 @@
-# waycwd - [xcwd](https://github.com/schischi/xcwd) for wayland
+# waycwd
 
-<picture>
- <img alt="Usage visulization of waycwd" width="600" src="https://github.com/fthoma/waycwd/assets/347446/429d27b7-a592-4c5b-a0c2-af3d38008753">
-</picture>
+Print the current working directory of the active window under [Wayland](https://wayland.freedesktop.org/). Inspired by [xcwd](https://github.com/schischi/xcwd).
+<p align="center">
+
 ![Usage visulization of waycwd](/assets/waycwd.png)
-Print the current working directory of the active window.
 
-A typical use case would be to start a new program in the same path as the current window. For example using [sway](https://swaywm.org/) and Alacritty(https://alacritty.org/) in your sway/config
+</p>
+
+## Usage
+Using waycwd you can start a new terminal emulator in the same directory as the current active window. 
+For example using [Sway](https://swaywm.org/) and [Alacritty](https://alacritty.org/) this could be achived by adding this to your *~/.config/sway/config*
 ```sway
-bindsym $mod+Backspace exec alacritty --working-directory="$(waycwd)"
+# ~/.config/sway/config
+bindsym Mod1+Backspace exec alacritty --working-directory="$(waycwd)"
 ```
+
+## Supported Platforms
+
+|Window Manager|Support|
+|----------|-|
+|[Sway](https://swaywm.org/)|:white_check_mark:|
+|Other|:x:|
+
+## About
+This repo also doubles as a playground for me to mess around with different programming languages. 
