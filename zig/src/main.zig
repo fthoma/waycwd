@@ -1,5 +1,6 @@
 const std = @import("std");
 const sway = @import("sway.zig");
+const proc = @import("proc.zig");
 
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
@@ -10,5 +11,6 @@ pub fn main() !void {
         return;
     };
 
-    try stdout.print("pid of focused window {}\n", .{pid});
+    const procPid = proc.getLastChildCwd(pid);
+    try stdout.print("{s}\n", .{procPid});
 }
