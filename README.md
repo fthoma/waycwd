@@ -4,7 +4,7 @@ Print the current working directory of the active window under
 [Wayland](https://wayland.freedesktop.org/). Inspired by
 [xcwd](https://github.com/schischi/xcwd).
 
-![Usage visulization of waycwd](/assets/waycwd.png)
+![Usage visulization of waycwd](/assets/waycwd.gif)
 
 ## Usage
 Using waycwd start a new terminal emulator in the same directory as the current
@@ -30,7 +30,7 @@ introspection. Its an RPC style unix socket responding with json messages. This
 makes waycwd an ideal starter project to learn about socket communication, file
 handling and serialization in a new programming language. In their respective
 directories there are implemantations in
-- [ ] [Zig](/zig)
+- [x] [Zig](/zig)
 - [x] [Rust](/rust)
 - [ ] [Go](/go)
 - [ ] [Python](/python)
