@@ -11,6 +11,7 @@ pub fn main() !void {
         return;
     };
 
-    const procPid = proc.getLastChildCwd(pid);
+    var buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
+    const procPid = proc.getLastChildCwd(pid, &buffer);
     try stdout.print("{s}\n", .{procPid});
 }

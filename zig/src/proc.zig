@@ -1,18 +1,17 @@
 const std = @import("std");
 
-pub fn getLastChildCwd(parent_pid: usize) []const u8 {
+pub fn getLastChildCwd(parent_pid: usize, buffer: *[std.fs.MAX_PATH_BYTES]u8) []const u8 {
     const last_child = getLastChild(parent_pid);
 
-    var path_buffer: [256]u8 = undefined;
+    var path_buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
     const path = std.fmt.bufPrint(&path_buffer, "/proc/{d}/cwd", .{last_child}) catch |err| {
         std.debug.print("ERROR: {}\n", .{err});
-        return &path_buffer;
+        return "~";
     };
 
-    var cwd_buffer: [4096]u8 = undefined;
-    const cwd = std.fs.readLinkAbsolute(path, &cwd_buffer) catch |err| {
+    const cwd = std.fs.readLinkAbsolute(path, buffer) catch |err| {
         std.debug.print("ERROR: {}\n", .{err});
-        return &cwd_buffer;
+        return "~";
     };
 
     return cwd;
