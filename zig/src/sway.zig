@@ -45,3 +45,18 @@ fn focusedNode(nodes: []SwayNode) usize {
 
     return 0;
 }
+
+test "focused node has pid equal to 2" {
+    // arrange
+    const aa = SwayNode{ .focused = false, .pid = 3, .nodes = undefined };
+    const ab = SwayNode{ .focused = true, .pid = 2, .nodes = undefined };
+    var children = [_]SwayNode{ aa, ab };
+    const a = SwayNode{ .focused = false, .pid = 1, .nodes = &children };
+
+    // act
+    var nodes = [_]SwayNode{a};
+    const focused_pid = focusedNode(&nodes);
+
+    // assert
+    try testing.expectEqual(2, focused_pid);
+}
