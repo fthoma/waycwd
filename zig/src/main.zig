@@ -4,6 +4,13 @@ const proc = @import("proc.zig");
 
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
+    var args = std.process.args();
+    while (args.next()) |arg| {
+        if (std.mem.eql(u8, arg, "version")) {
+            try stdout.print("{s}\n", .{@import("config").version});
+            return;
+        }
+    }
 
     const pid = sway.getPidOfFocusedWindow() catch |err| {
         std.debug.print("ERROR: {}\n", .{err});
