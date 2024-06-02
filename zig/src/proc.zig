@@ -35,7 +35,7 @@ fn getLastChild(parent_pid: usize) usize {
         return 0;
     };
 
-    var children = std.mem.split(u8, buffer[0..bytes_read], ",");
+    var children = std.mem.split(u8, buffer[0..bytes_read], " ");
     const first_child = std.mem.trim(u8, children.first(), " ");
     if (first_child.len == 0) return 0;
 
