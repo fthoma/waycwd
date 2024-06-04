@@ -6,12 +6,18 @@ pub fn getLastChildCwd(parent_pid: usize, buffer: *[std.fs.MAX_PATH_BYTES]u8) []
     var path_buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
     const path = std.fmt.bufPrint(&path_buffer, "/proc/{d}/cwd", .{last_child}) catch |err| {
         std.debug.print("ERROR: {}\n", .{err});
-        return "~";
+        return std.fs.cwd().realpath(".", buffer) catch |errcwd| {
+            std.debug.print("ERROR: {}\n", .{errcwd});
+            return "/";
+        };
     };
 
     const cwd = std.fs.readLinkAbsolute(path, buffer) catch |err| {
         std.debug.print("ERROR: {}\n", .{err});
-        return "~";
+        return std.fs.cwd().realpath(".", buffer) catch |errcwd| {
+            std.debug.print("ERROR: {}\n", .{errcwd});
+            return "/";
+        };
     };
 
     return cwd;

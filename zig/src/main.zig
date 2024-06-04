@@ -14,7 +14,9 @@ pub fn main() !void {
 
     const pid = sway.getPidOfFocusedWindow() catch |err| {
         std.debug.print("ERROR: {}\n", .{err});
-        try stdout.print("~\n", .{});
+        var path_buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
+        const path = try std.fs.cwd().realpath(".", &path_buffer);
+        try stdout.print("{s}\n", .{path});
         return;
     };
 
