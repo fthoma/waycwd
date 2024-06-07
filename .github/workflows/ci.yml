@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Set version
         run: |
-          TAG=${{ gihub.ref }}
+          TAG=${{ github.ref }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
       - name: Release
         uses: softprops/action-gh-release@v2
