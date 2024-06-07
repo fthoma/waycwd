@@ -26,11 +26,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Set version
-        run: VERSION="${{ github.ref#v }}"
+      - name: Extract version
+        id: extract_version
+        run: echo "::set-output name=version::${{ github.ref#v }}"
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: waycwd ${{ env.VERSION }}
+          name: waycwd ${{ steps.extract_version.outputs.version }}
           files: zig-out/bin/waycwd*.tar.gz
           draft: true
