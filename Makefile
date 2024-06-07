@@ -10,7 +10,7 @@ test:
 
 release:
 	zig build --release=small -Dversion=$(VERSION)
-	$(shell cd zig-out/bin && tar cfz waycwd-$(VERSION).tar.gz waycwd)
+	tar cfz zig-out/bin/waycwd-$(VERSION).tar.gz -C zig-out/bin waycwd
 
 clean:
 	rm -rf zig-cache zig-out
