@@ -43,6 +43,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: waycwd ${{ env.VERSION }}
-          body: ""
           files: waycwd*.tar.gz
-          draft: true
