@@ -1,4 +1,4 @@
-VERSION = $(shell git describe --tags --match "*.*.*" --always | awk -F '[-]' '{split($$1, ver, "."); ver[2]++; print ($$2)? ver[1]"."ver[2]".0-dev"$$2"+"substr($$3, 2) : ($$1~/\./) ? $$1 : "0.1.0-dev+"$$1}')
+VERSION = $(shell git describe --tags --match "v?*.*.*" --always | awk -F '[-]' '{sub(/^v/, ""); split($$1, ver, "."); ver[3]++; print ($$2)? ver[1]"."ver[2]"."ver[3]"-dev"$$2"+"substr($$3, 2) : ($$1~/\./) ? $$1 : "0.1.0-dev+"$$1}')
 
 .PHONY: build test release clean
 

@@ -19,7 +19,7 @@ bindsym Mod1+Backspace exec alacritty --working-directory="$(waycwd)"
 ## Installation
 
 - Get the latest binary from the [releases](https://github.com/fthoma/waycwd/releases/latest)
-- Or build from source ```make``` (using zig)
+- Or build from source ```make release``` (using zig)
 
 ## Supported Window Managers
 
