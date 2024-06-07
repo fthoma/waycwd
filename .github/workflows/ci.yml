@@ -12,10 +12,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Build
-      run: make
-
-    - name: Test
-      run: make test
+      - uses: actions/checkout@v4
+      
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.12.0
+    
+      - name: Build
+        run: make
+        
+      - name: Test
+        run: make test
+    
+      - name: Build release
+        run: make release
