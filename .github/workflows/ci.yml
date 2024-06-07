@@ -28,11 +28,13 @@ jobs:
     steps:
       - name: Set version
         run: |
-          TAG=${{ github.ref }}
+          TAG=${{ github.ref.name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           name: waycwd ${{ env.VERSION }}
-          files: zig-out/bin/waycwd*.tar.gz
+          files: |
+            zig-out/bin/waycwd
+            zig-out/bin/waycwd*.tar.gz
           draft: true
