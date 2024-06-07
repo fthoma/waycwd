@@ -35,6 +35,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: waycwd ${{ github.ref#v }}
+          name: waycwd ${{ github.ref//v/ }}
           files: zig-out/bin/waycwd*.tar.gz
           draft: true
