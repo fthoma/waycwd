@@ -6,6 +6,10 @@ Print the current working directory of the active window under
 
 ![Usage visulization of waycwd](/assets/waycwd.gif)
 
+## Installation
+- Get the latest binary from the [release page](release/latest)
+- Or build from source ```make``` (using zig)
+
 ## Usage
 Using waycwd start a new terminal emulator in the same directory as the current
 active window. For example using [Sway](https://swaywm.org/) and
@@ -15,22 +19,7 @@ active window. For example using [Sway](https://swaywm.org/) and
 bindsym Mod1+Backspace exec alacritty --working-directory="$(waycwd)"
 ```
 
-## Supported Platforms
+### Supported Window Managers
 
-|Window Manager|Support|
-|-|-|
-|[Sway](https://swaywm.org/)|:white_check_mark:|
-|Other|:x:|
-
-## Programming Language Showcase
-This repo also doubles as a playground for me to mess around with different
-programming languages. waycwd uses
-[sway-ipc](https://man.archlinux.org/man/sway-ipc.7.en) for window
-introspection. Its an RPC style unix socket responding with json messages. This
-makes waycwd an ideal starter project to learn about socket communication, file
-handling and serialization in a new programming language. In their respective
-directories there are implemantations in
-- [x] [Zig](/zig)
-- [x] [Rust](/rust)
-- [ ] [Go](/go)
-- [ ] [Python](/python)
+- [Sway](https://swaywm.org/)
+- Others migh follow as needed
