@@ -6,11 +6,8 @@ Print the current working directory of the active window under
 
 ![Usage visulization of waycwd](/assets/waycwd.gif)
 
-## Installation
-- Get the latest binary from the [release page](release/latest)
-- Or build from source ```make``` (using zig)
-
 ## Usage
+
 Using waycwd start a new terminal emulator in the same directory as the current
 active window. For example using [Sway](https://swaywm.org/) and
 [Alacritty](https://alacritty.org/) this could be achived with this line in
@@ -19,7 +16,12 @@ active window. For example using [Sway](https://swaywm.org/) and
 bindsym Mod1+Backspace exec alacritty --working-directory="$(waycwd)"
 ```
 
-### Supported Window Managers
+## Installation
+
+- Get the latest binary from the [releases](https://github.com/fthoma/waycwd/releases/latest)
+- Or build from source ```make``` (using zig)
+
+## Supported Window Managers
 
 - [Sway](https://swaywm.org/)
-- Others migh follow as needed
+- Others are not supported
