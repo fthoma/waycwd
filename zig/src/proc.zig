@@ -5,17 +5,17 @@ pub fn getLastChildCwd(parent_pid: usize, buffer: *[std.fs.MAX_PATH_BYTES]u8) []
 
     var path_buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
     const path = std.fmt.bufPrint(&path_buffer, "/proc/{d}/cwd", .{last_child}) catch |err| {
-        std.debug.print("ERROR: {}\n", .{err});
+        std.log.info("proc.bufPrint: {}", .{err});
         return std.fs.cwd().realpath(".", buffer) catch |errcwd| {
-            std.debug.print("ERROR: {}\n", .{errcwd});
+            std.log.info("proc.getLastChildCwd.realpath: {}", .{errcwd});
             return "/";
         };
     };
 
     const cwd = std.fs.readLinkAbsolute(path, buffer) catch |err| {
-        std.debug.print("ERROR: {}\n", .{err});
+        std.log.info("proc.getLastChildCwd.readLinkAbsolute: {}", .{err});
         return std.fs.cwd().realpath(".", buffer) catch |errcwd| {
-            std.debug.print("ERROR: {}\n", .{errcwd});
+            std.log.info("proc.getLastChildCwd.realpath: {}", .{errcwd});
             return "/";
         };
     };
@@ -26,18 +26,18 @@ pub fn getLastChildCwd(parent_pid: usize, buffer: *[std.fs.MAX_PATH_BYTES]u8) []
 fn getLastChild(parent_pid: usize) usize {
     var buffer: [256]u8 = undefined;
     const path = std.fmt.bufPrint(&buffer, "/proc/{d}/task/{d}/children", .{ parent_pid, parent_pid }) catch |err| {
-        std.debug.print("ERROR: {}\n", .{err});
+        std.log.info("proc.cwd.getLastChild.bufPrint: {}", .{err});
         return 0;
     };
 
     const file = std.fs.openFileAbsolute(path, .{}) catch |err| {
-        std.debug.print("ERROR: {s} {}\n", .{ &buffer, err });
+        std.log.info("proc.cwd.getLastChild.openFileAbsolute: {}", .{err});
         return 0;
     };
     defer file.close();
 
     const bytes_read = file.readAll(&buffer) catch |err| {
-        std.debug.print("ERROR: {s} {}\n", .{ &buffer, err });
+        std.log.info("proc.getLastChild.readAll: {}", .{err});
         return 0;
     };
 
@@ -46,7 +46,7 @@ fn getLastChild(parent_pid: usize) usize {
     if (first_child.len == 0) return 0;
 
     const child_pid = std.fmt.parseInt(usize, first_child, 10) catch |err| {
-        std.debug.print("ERROR: {} '{s}'\n", .{ err, first_child });
+        std.log.info("proc.getLastChild.parseInt: {}", .{err});
         return 0;
     };
 

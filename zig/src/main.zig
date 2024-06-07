@@ -13,7 +13,7 @@ pub fn main() !void {
     }
 
     const pid = sway.getPidOfFocusedWindow() catch |err| {
-        std.debug.print("ERROR: {}\n", .{err});
+        std.log.info("main.getPidOfFocusedWindow: {}", .{err});
         var path_buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
         const path = try std.fs.cwd().realpath(".", &path_buffer);
         try stdout.print("{s}\n", .{path});
@@ -21,6 +21,6 @@ pub fn main() !void {
     };
 
     var buffer: [std.fs.MAX_PATH_BYTES]u8 = undefined;
-    const procPid = proc.getLastChildCwd(pid, &buffer);
-    try stdout.print("{s}\n", .{procPid});
+    const child_cwd = proc.getLastChildCwd(pid, &buffer);
+    try stdout.print("{s}\n", .{child_cwd});
 }
