@@ -31,10 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write 
-    steps:  
+    steps:
+      - name: Set version
+        run: VERSION=${ github.ref#v }
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: waycwd ${{ github.ref//v/ }}
+          name: waycwd ${{ env.VERSION }}
           files: zig-out/bin/waycwd*.tar.gz
           draft: true
